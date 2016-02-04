@@ -1,5 +1,5 @@
 # DownFooter
-DownFooter is an Oracle Application Express Plugin that places footer UI elements at the bottom of the browser page. Based on DownBoy jQuery plugin.
+DownFooter is a smal Oracle Application Express Plugin that places footer UI elements at the bottom of the browser page. Based on DownBoy jQuery plugin.
 
 Compatible with APEX 4.2 and 5.
 

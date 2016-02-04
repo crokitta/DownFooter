@@ -25,7 +25,7 @@
       "plugin" : {
         "internalName" : "NL.ROKIT.DOWNBOY",
         "type" : "dynamic action",
-        "demo" : "",
+        "demo" : "http://apex.oracle.com/pls/apex/f?p=58479:1::::::",
         "previewImage" : "http://rokit.nl/asp/assets/img/rokit-logo.png"
       }
     }

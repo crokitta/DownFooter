@@ -1,0 +1,33 @@
+{
+  "name" : "DownFooter",
+  "version" : "1.0",
+  "description" : "A small APEX jQuery plugin to push your footer to the bottom of your responsive dynamic height page.",
+  "keywords" : ["footer", "bottom"],
+  "homepage" : "https://github.com/crokitta/DownFooter",
+  "bugs" : {
+    "url" : "https://github.com/crokitta/DownFooter/issues",
+    "email" : "christian@rokitta.nl"
+  },
+  "license" : "MIT",
+  "author" : {
+    "name" : "Christian Rokitta",
+    "email" : "christian@rokitta.nl",
+    "url" : "http://www.rokit.nl/"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/crokitta/DownFooter.git"
+  },
+ "oracle" : {
+    "versions" : ["11.2.0.1", "12.1.0.1"],
+    "apex" : {
+      "versions" : ["4.2.4","5.0.0"],
+      "plugin" : {
+        "internalName" : "NL.ROKIT.DOWNBOY",
+        "type" : "dynamic action",
+        "demo" : "",
+        "previewImage" : "http://rokit.nl/asp/assets/img/rokit-logo.png"
+      }
+    }
+  }
+}

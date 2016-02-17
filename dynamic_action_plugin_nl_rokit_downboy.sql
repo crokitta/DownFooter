@@ -17,7 +17,7 @@ prompt  Set Credentials...
 begin
  
   -- Assumes you are running the script connected to SQL*Plus as the Oracle user APEX_040200 or as the owner (parsing schema) of the application.
-  wwv_flow_api.set_security_group_id(p_security_group_id=>nvl(wwv_flow_application_install.get_workspace_id,1273308318410616));
+  wwv_flow_api.set_security_group_id(p_security_group_id=>nvl(wwv_flow_application_install.get_workspace_id,7425722454134845));
  
 end;
 /
@@ -53,7 +53,7 @@ prompt  Set Application ID...
 begin
  
    -- SET APPLICATION ID
-   wwv_flow.g_flow_id := nvl(wwv_flow_application_install.get_application_id,155);
+   wwv_flow.g_flow_id := nvl(wwv_flow_application_install.get_application_id,115);
    wwv_flow_api.g_id_offset := nvl(wwv_flow_application_install.get_offset,0);
 null;
  
@@ -77,7 +77,7 @@ prompt  ...plugins
 begin
  
 wwv_flow_api.create_plugin (
-  p_id => 8588620522580888 + wwv_flow_api.g_id_offset
+  p_id => 119349149090340872 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
  ,p_plugin_type => 'DYNAMIC ACTION'
  ,p_name => 'NL.ROKIT.DOWNBOY'
@@ -102,33 +102,41 @@ wwv_flow_api.create_plugin (
 '      apex_debug.message(''p_dynamic_action.attribute_02 = '' || v_jquerysel);'||unistr('\000a')||
 '   end if;'||unistr('\000a')||
 ''||unistr('\000a')||
-'   if v_elmsel = ''ut-footer'' then'||unistr('\000a')||
-'      apex_javascript.add_lib'||
-'rary(p_name => ''jquery.downboy.auto.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
-'      v_init_js   := ''function downBoyInitUT(){var marginTop=$("div#t_Body_content").css("margin-top");var marginTopVal=marginTop.substr(0,marginTop.length-2);var newHeight=$(window).height()-marginTopVal;$("div#t_Body_content").css("min-height",newHeight+"px")}'';'||unistr('\000a')||
-'      v_init_js   := v_init_js || ''function downBoyInit'||
-'(){console.log("downBoy: init on UT-footer");downBoyInitUT();downBoy("footer"); window.onresize = function() {downBoyInitUT();downBoy("footer");};}'';'||unistr('\000a')||
+'   if v_elmsel = ''ut-footer'''||unistr('\000a')||
+'   then'||unistr('\000a')||
+'      apex_javascript.add_'||
+'library(p_name => ''jquery.downboy.auto.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
+'      v_init_js      :='||unistr('\000a')||
+'         ''function downBoyInitUT(){var marginTop=$("div#t_Body_content").css("margin-top");var marginTopVal=marginTop.substr(0,marginTop.length-2);var newHeight=$(window).height()-marginTopVal;$("div#t_Body_content").css("min-height",newHeight+"px")}'';'||unistr('\000a')||
+'      v_init_js      :='||unistr('\000a')||
+'         v_init_'||
+'js || ''function downBoyInit(){console.log("downBoy: init on UT-footer");if($("footer").length){downBoyInitUT();downBoy("footer"); window.onresize = function() {downBoyInitUT();downBoy("footer");};}}'';'||unistr('\000a')||
 '      apex_javascript.add_library(p_name => ''jquery.downboy.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
 '   elsif v_elmsel = ''footer-tag'''||unistr('\000a')||
 '   then'||unistr('\000a')||
-'      apex_javascript.add_library(p_name => ''jquery.downboy.auto.min'', p_directory => p_plugin.file_prefi'||
-'x);'||unistr('\000a')||
+'      apex_javascript.add_library(p_name => ''jquery.do'||
+'wnboy.auto.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
 '      v_init_js   := ''function downBoyInit(){console.log("downBoy: init on FOOTER element");}'';'||unistr('\000a')||
 '   else'||unistr('\000a')||
 '      v_init_js      :='||unistr('\000a')||
 '         ''function downBoyInit(){console.log("downBoy: init on jQuery selector: '' ||'||unistr('\000a')||
 '         v_jquerysel ||'||unistr('\000a')||
-'         ''");downBoy("'' ||'||unistr('\000a')||
+'         ''");if ($("'' ||'||unistr('\000a')||
 '         v_jquerysel ||'||unistr('\000a')||
+'         ''").length) {downBoy("'' ||'||unistr('\000a')||
+'         v_jquerysel ||'||
+''||unistr('\000a')||
 '         ''"); window.onresize = function() {downBoy("'' ||'||unistr('\000a')||
 '         v_jquerysel ||'||unistr('\000a')||
-'         ''");};}'';'||unistr('\000a')||
-'      a'||
-'pex_javascript.add_library(p_name => ''jquery.downboy.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
+'         ''")}} else {console.log("downBoy: jQuery selector: '' ||'||unistr('\000a')||
+'         v_jquerysel ||'||unistr('\000a')||
+'         '' does not exist")}}'';'||unistr('\000a')||
+'      apex_javascript.add_library(p_name => ''jquery.downboy.min'', p_directory => p_plugin.file_prefix);'||unistr('\000a')||
 '   end if;'||unistr('\000a')||
 ''||unistr('\000a')||
 '   apex_javascript.add_inline_code(p_code => v_init_js, p_key => null);'||unistr('\000a')||
-'   v_result.javascript_function   := ''downBoyInit'';'||unistr('\000a')||
+'   v_res'||
+'ult.javascript_function   := ''downBoyInit'';'||unistr('\000a')||
 '   return v_result;'||unistr('\000a')||
 'end;'
  ,p_render_function => 'downboy'
@@ -139,13 +147,13 @@ wwv_flow_api.create_plugin (
 '<p>'||unistr('\000a')||
 '	<font color="#333333" face="Helvetica Neue, Helvetica, Segoe UI, Arial, freesans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol"><span style="font-size: 16px; line-height: 25.6px;">APEX adaptation by Christian Rokitta, 2016/02.</span></font></p>'||unistr('\000a')||
 ''
- ,p_version_identifier => '1.0'
+ ,p_version_identifier => '1.1'
  ,p_about_url => 'https://github.com/crokitta/DownFooter'
   );
 wwv_flow_api.create_plugin_attribute (
-  p_id => 8591611581706577 + wwv_flow_api.g_id_offset
+  p_id => 119352140149466561 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_id => 8588620522580888 + wwv_flow_api.g_id_offset
+ ,p_plugin_id => 119349149090340872 + wwv_flow_api.g_id_offset
  ,p_attribute_scope => 'COMPONENT'
  ,p_attribute_sequence => 1
  ,p_display_sequence => 10
@@ -159,33 +167,33 @@ wwv_flow_api.create_plugin_attribute (
 '<b>UT Footer (APEX 5 UT only):</b> Apply to the footer element in the APEX 5 Universal Theme.'
   );
 wwv_flow_api.create_plugin_attr_value (
-  p_id => 8592005542709339 + wwv_flow_api.g_id_offset
+  p_id => 119352534110469323 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_attribute_id => 8591611581706577 + wwv_flow_api.g_id_offset
+ ,p_plugin_attribute_id => 119352140149466561 + wwv_flow_api.g_id_offset
  ,p_display_sequence => 10
  ,p_display_value => 'Footer Element'
  ,p_return_value => 'footer-tag'
   );
 wwv_flow_api.create_plugin_attr_value (
-  p_id => 8592400151711837 + wwv_flow_api.g_id_offset
+  p_id => 119352928719471821 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_attribute_id => 8591611581706577 + wwv_flow_api.g_id_offset
+ ,p_plugin_attribute_id => 119352140149466561 + wwv_flow_api.g_id_offset
  ,p_display_sequence => 20
  ,p_display_value => 'jQuery Selector'
  ,p_return_value => 'jquery-selector'
   );
 wwv_flow_api.create_plugin_attr_value (
-  p_id => 8594900747019279 + wwv_flow_api.g_id_offset
+  p_id => 119355429314779263 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_attribute_id => 8591611581706577 + wwv_flow_api.g_id_offset
+ ,p_plugin_attribute_id => 119352140149466561 + wwv_flow_api.g_id_offset
  ,p_display_sequence => 30
  ,p_display_value => 'UT Footer (APEX 5 UT only)'
  ,p_return_value => 'ut-footer'
   );
 wwv_flow_api.create_plugin_attribute (
-  p_id => 8592909627722625 + wwv_flow_api.g_id_offset
+  p_id => 119353438195482609 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_id => 8588620522580888 + wwv_flow_api.g_id_offset
+ ,p_plugin_id => 119349149090340872 + wwv_flow_api.g_id_offset
  ,p_attribute_scope => 'COMPONENT'
  ,p_attribute_sequence => 2
  ,p_display_sequence => 20
@@ -194,7 +202,7 @@ wwv_flow_api.create_plugin_attribute (
  ,p_is_required => false
  ,p_default_value => 'footer'
  ,p_is_translatable => false
- ,p_depending_on_attribute_id => 8591611581706577 + wwv_flow_api.g_id_offset
+ ,p_depending_on_attribute_id => 119352140149466561 + wwv_flow_api.g_id_offset
  ,p_depending_on_condition_type => 'EQUALS'
  ,p_depending_on_expression => 'jquery-selector'
  ,p_help_text => '<span class="instructiontext">'||unistr('\000a')||
@@ -228,9 +236,9 @@ end;
 begin
  
 wwv_flow_api.create_plugin_file (
-  p_id => 8589425558614954 + wwv_flow_api.g_id_offset
+  p_id => 119349954126374938 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_id => 8588620522580888 + wwv_flow_api.g_id_offset
+ ,p_plugin_id => 119349149090340872 + wwv_flow_api.g_id_offset
  ,p_file_name => 'jquery.downboy.auto.min.js'
  ,p_mime_type => 'application/javascript'
  ,p_file_content => wwv_flow_api.g_varchar2_table
@@ -256,9 +264,9 @@ end;
 begin
  
 wwv_flow_api.create_plugin_file (
-  p_id => 8590113432616639 + wwv_flow_api.g_id_offset
+  p_id => 119350642000376623 + wwv_flow_api.g_id_offset
  ,p_flow_id => wwv_flow.g_flow_id
- ,p_plugin_id => 8588620522580888 + wwv_flow_api.g_id_offset
+ ,p_plugin_id => 119349149090340872 + wwv_flow_api.g_id_offset
  ,p_file_name => 'jquery.downboy.min.js'
  ,p_mime_type => 'application/javascript'
  ,p_file_content => wwv_flow_api.g_varchar2_table

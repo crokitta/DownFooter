@@ -1,6 +1,6 @@
 {
   "name" : "DownFooter",
-  "version" : "1.0",
+  "version" : "1.1",
   "description" : "A small APEX jQuery plugin to push your footer to the bottom of your responsive dynamic height page.",
   "keywords" : ["footer", "bottom"],
   "homepage" : "https://github.com/crokitta/DownFooter",
